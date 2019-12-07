@@ -1,11 +1,15 @@
-var a = 5;
-var b = 5;
+var a = 10;
+var b = 10;
 var theNumbersMatch
 
-if ( a == b ) {
+if (a == true) {
     theNumbersMatch = true;
 } else {
     theNumbersMatch = false;
 }
 
 console.log(theNumbersMatch);
+
+
+a == b ? console.log("Match") : console.log("No match");
+// Is a and b var strigly the same? if yes prin to console match if not print to console no match
