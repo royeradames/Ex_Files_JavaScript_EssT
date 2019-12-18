@@ -1,5 +1,6 @@
 const AREA = document.body;
-var CIRCLE = [document.querySelector('.circle'), document.querySelector('#circle2') ]
+const CIRCLE = document.querySelector('.circle');
+const CIRCLE2 = document.querySelector('#circle2');
 
 var windowWidth = window.innerWidth;
 var windowHeight = window.innerHeight;
