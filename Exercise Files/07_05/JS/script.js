@@ -4,11 +4,10 @@ const ALERT = document.querySelector("#booking-alert");
 CTA.classList.remove("hide");
 ALERT.classList.add("hide");
 
-function reveal(e) {
+function reveal(e, html) {
     e.preventDefault();
-    CTA.classList.toggle("hide");
-    ALERT.classList.toggle("hide");
+    html == "oopps" ? CTA.innerHTML = "Book Now!" : CTA.innerHTML = "oopps";
 }
 
-CTA.addEventListener('click', reveal, false);
+CTA.addEventListener('click', function(e){reveal(e, this.innerHTML)}, false);
 CTA.addEventListener('click', function(){console.log("The button was clicked!")}, false);
