@@ -63,7 +63,7 @@ function reset(){//finish this buttom
     theTimer.innerHTML = "00:00:00";
     testArea.value = "";
     timerRunning = false;
-    interval = null;
+    //interval = null;
 };
 
 // Event listeners for keyboard input and the reset button:
