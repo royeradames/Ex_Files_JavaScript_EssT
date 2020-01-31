@@ -109,17 +109,17 @@ body {
     padding: 0;
 }
 
-.masthead {
+.masthead{
     padding: 1em 2em;
     background-color: #0D1B2E;
     color: white;
 }
 
-.masthead h1 {
+.masthead h1, .leader-board h2  {
     text-align: center;
 }
 
-.intro {
+.intro, .leader-board {
     padding: 2em 2em;
     color: #ffffff;
     background: #429890;
@@ -127,7 +127,7 @@ body {
 
 
 .intro p,
-.test-area, .metrics {
+.test-area, .metrics, .leader-board-background {
     margin: 0 auto;
     max-width: 550px;
 }

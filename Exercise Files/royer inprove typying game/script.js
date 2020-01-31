@@ -1,7 +1,6 @@
 const testWrapper = document.querySelector(".test-wrapper");
 const testArea = document.querySelector("#test-area");
 const testingTextSpot = document.querySelector("#origin-text p");
-// const originText = document.querySelector("#origin-text p").innerHTML;
 const resetButton = document.querySelector("#reset");
 const theTimer = document.querySelector(".timer");
 const wpmValue = document.querySelector(".wpm .value");
@@ -17,6 +16,8 @@ let arrayText = ["They are written to engender faith in Jesus as the Messiah and
 "A software engineer applies mathematical analysis and the principles of computer science in order to design and develop computer software. There are many types of software that a software engineer can develop, such as operating systems, computer games, middleware, business applications and network control systems.",
 "Software Developers often work for computer firms and manufacturers. Their main role is to create the foundations for operative systems on which Computer Programmers work. They design, write, and test code for new systems and software to ensure efficiency."];
 let randomOriginText = "";
+
+randomOriginText = testingTextSpot.textContent = arrayText[getRandomIndex()]; //populate origin text with new text from array
 // Add leading zero to numbers 9 or below (purely for aesthetics):
 function leadingZero(time) {
     if (time <= 9) {
@@ -28,7 +29,7 @@ function leadingZero(time) {
 // Run a standard minute/second/hundredths timer:
 function runTimer() {
     let currentTime = leadingZero(timer[0]) + ":" + leadingZero(timer[1]) + ":" + leadingZero(timer[2]);
-    theTimer.innerHTML = currentTime;
+    theTimer.textContent = currentTime;
     timer[3]++;
 
     timer[0] = Math.floor((timer[3]/100)/60);
@@ -40,18 +41,20 @@ function runTimer() {
 function spellCheck() {
     let textEntered = testArea.value;
     // let originTextMatch = originText.substring(0,textEntered.length);
-    let originTextMatch = randomOriginText.substring(0, textEntered.value);
+    let originTextMatch = randomOriginText.substring(0, textEntered.length);
+    
+    // console.log(textEntered);
+    // console.log(textEntered.lenght);
+    // console.log(randomOriginText.substring(0, textEntered.value));
     console.log(textEntered);
-    console.log(textEntered.lenght);
-    console.log(randomOriginText.substring(0, textEntered.value));
-    console.log(originTextMatch);
+    
     if (textEntered == randomOriginText) { //Finish speed test
         clearInterval(interval);
         testWrapper.style.borderColor = "#429890";
-        wpmValue.innerHTML = wordsPerTime(randomOriginText, timer[0]);
-        wpsValue.innerHTML = wordsPerTime(randomOriginText, timer[1]);
+        wpmValue.textContent = wordsPerTime(randomOriginText, timer[0]);
+        wpsValue.textContent = wordsPerTime(randomOriginText, timer[1]);
         //display the numbers of errors
-        errorsValue.innerHTML = errorCounter;
+        errorsValue.textContent = errorCounter;
     } else {
         if (textEntered == originTextMatch) { //working on the test correctly
             testWrapper.style.borderColor = "#65CCf3";
@@ -69,8 +72,7 @@ function start() {
     let textEnterdLength = testArea.value.length;
     if (textEnterdLength === 0 && !timerRunning) {
         timerRunning = true;
-        randomOriginText = testingTextSpot.innerHTML = arrayText[getRandomIndex()]; //populate origin text with new text from array
-        interval = setInterval(runTimer, 10);
+                interval = setInterval(runTimer, 10);
     }
     
 }
@@ -83,10 +85,13 @@ function reset() {
     timerRunning = false;
 
     testArea.value = "";
-    theTimer.innerHTML = "00:00:00";
+    theTimer.textContent = "00:00:00";
     testWrapper.style.borderColor = "grey";
-    wpmValue.innerHTML = 0;
-    errorsValue.innerHTML = 0;
+    wpmValue.textContent = 0;
+    wpsValue.textContent = 0;
+    errorsValue.textContent = 0;
+
+    randomOriginText = testingTextSpot.textContent = arrayText[getRandomIndex()]; //populate origin text with new text from array
 }
 
 // Event listeners for keyboard input and the reset
@@ -103,12 +108,12 @@ function wordsPerTime(toldString, time) {
         return 0;
       } else{
       let regularExpression =/\s+/;
-      let stringWords = toldString.trim().split(regularExpression);
-      
-      if(minutes == timer[0]){
-          return stringWords.length/time;
-        }else{
-            return stringWords.length/time;
+      let totalWords = toldString.trim().split(regularExpression).length;
+      let totalSeconds = time + (timer[0]*60);
+      if(time == timer[0]){//calculate wpm if the time value is minutes
+          return Math.round(totalWords/time);
+        }else{//else calculate wps if the time value is seconds
+            return Math.round(totalWords/totalSeconds);//total words / total seconds
       }
   }//by Royer Adames
 }
