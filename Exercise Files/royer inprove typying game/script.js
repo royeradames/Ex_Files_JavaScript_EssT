@@ -16,8 +16,12 @@ let arrayText = ["They are written to engender faith in Jesus as the Messiah and
 "A software engineer applies mathematical analysis and the principles of computer science in order to design and develop computer software. There are many types of software that a software engineer can develop, such as operating systems, computer games, middleware, business applications and network control systems.",
 "Software Developers often work for computer firms and manufacturers. Their main role is to create the foundations for operative systems on which Computer Programmers work. They design, write, and test code for new systems and software to ensure efficiency."];
 let randomOriginText = "";
+//sorting function 
+let sortTwoFields = (a,b) => a[0] - b[0] || a[1] - b[1];
 
 randomOriginText = testingTextSpot.textContent = arrayText[getRandomIndex()]; //populate origin text with new text from array
+
+
 // Add leading zero to numbers 9 or below (purely for aesthetics):
 function leadingZero(time) {
     if (time <= 9) {
@@ -124,3 +128,4 @@ function getRandomIndex(){
 }
 
 // add a high score board
+ 
